@@ -1,5 +1,5 @@
-.App {
-  text-align: center;
+*{
+  font-family: 'Segoe UI';
 }
 
 .App-logo {
@@ -7,13 +7,7 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+.App {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -22,17 +16,37 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  text-align: center;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.message_type_button {
+  min-width: 350px;
+  min-height: 350px;
+  max-width: 350px;
+  max-height: 350px;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 10px;
+
+  border-radius: 10px;
+  background: #282c34;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #303030,
+    inset -5px -5px 10px #222;
+  cursor: pointer;
+  border: none;
+  color: #d6d6d6;
+  transition: 500ms;
+}
+
+.message_type_button:hover {
+  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #222,
+    inset -5px -5px 10px #444;
+  color: #d6d6d6;
+  transition: 500ms;
 }

@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import logo from './beeper_logo.png';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <img src={logo} className="App-logo" alt="logo" />
+      <p>
+        בחרו את סוג ההודעה
+      </p>
+      <div dir='rtl'>
+        <button className='message_type_button'>
+          ביפר
+        </button>
+        <button className='message_type_button'>
+          הודעת מפקד
+        </button>
+        <button className='message_type_button'>
+          הודעת בוקר/ערב
+        </button>
+        <button className='message_type_button'>
+          הודעת צהריים/ערב
+        </button>
+      </div>
     </div>
   );
 }
