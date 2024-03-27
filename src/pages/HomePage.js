@@ -6,9 +6,7 @@ function HomePage() {
   return (
     <div className="App">
       <img src={logo} className="App-logo" alt="logo" />
-      <p className='header_text'>
-        סוג ההודעה
-      </p>
+      <p className='header_text'>סוג ההודעה</p>
       <div className='message_type_button_div' dir='rtl'>
         <Link to="/CreateBeeper">
           <button className='neumorphism message_type_button'> ביפר </button>
