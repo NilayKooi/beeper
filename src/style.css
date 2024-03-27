@@ -1,0 +1,136 @@
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+}
+
+.App-logo {
+  height: 40vmin;
+  margin: -50px;
+  pointer-events: none;
+}
+
+.header_logo {
+  height: 20vmin;
+  margin: -20px;
+  margin-left: 15px;
+  pointer-events: none;
+}
+
+.header_menu {
+  background-color: #282c34;
+  min-height: 15vh;
+  max-height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  text-align: center;
+}
+
+.App {
+  background-color: #282c34;
+  min-height: 80vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.CreatePage{
+  background-color: #282c34;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.header_text {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.links_div{
+  display: flex;
+  direction: rtl;
+}
+
+.link_text {
+  font-weight: bold;
+  font-size: 20px;
+  margin: 15px;
+  text-decoration: none;
+  color: white;
+}
+
+.link_text:hover{
+  text-decoration: underline;
+}
+
+.message_type_button_div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: top;
+  flex-wrap: wrap;
+}
+
+.neumorphism{
+  border-radius: 10px;
+  background: #282c34;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #303030,
+    inset -5px -5px 10px #222;
+  cursor: pointer;
+  border: none;
+  color: #d6d6d6;
+  transition: 500ms;
+}
+
+.message_type_button {
+  min-width: 250px;
+  min-height: 200px;
+  max-width: 250px;
+  max-height: 200px;
+  font-size: 20px;
+  margin: 10px;
+}
+
+.message_type_button:hover {
+  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #222,
+    inset -5px -5px 10px #444;
+  color: #d6d6d6;
+  transition: 500ms;
+}
+
+.message_edit_section{
+  flex: 1;
+  min-height: 75vh;
+  max-height: 75vh;
+  padding: 20px;
+  margin: 20px;
+  margin-top: 0px;
+}
+.message_output_section{
+  flex: 1;
+  min-height: 75vh;
+  max-height: 75vh;
+  padding: 20px;
+  margin: 20px;
+  margin-top: 0px;
+}
