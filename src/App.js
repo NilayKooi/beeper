@@ -1,11 +1,11 @@
-import logo from './beeper_logo.png';
+import logo from './assets/beeper_logo.png';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <img src={logo} className="App-logo" alt="logo" />
-      <p>
+      <p className='header_text'>
         בחרו את סוג ההודעה
       </p>
       <div dir='rtl'>

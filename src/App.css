@@ -1,5 +1,5 @@
-*{
-  font-family: 'Segoe UI';
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .App-logo {
@@ -19,8 +19,9 @@
   text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
+.header_text {
+  font-weight: bold;
+  font-size: 50px;
 }
 
 .message_type_button {
