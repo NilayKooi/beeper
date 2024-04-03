@@ -1,80 +1,157 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import HeaderMenu from '../components/HeaderMenu.js';
 
-const default_text = `*סטטוס תקלות - צהריים:*
-
-*🟠ניטור שווא בבדיקת CIMC נצבעת לסירוגין בערך False בשירות DNA:*
-*מזהה:* INC0118598
-לאחר בדיקה של צוות הנדסת רשת נראה כי הרכיב לא נופל ומדובר בניטור שווא.
-צוות Devnet מצאו כי שרת ה-SRM מתריע על כך שהרכיב למטה כאשר הוא לא מה שיוצר את הניטור שווא.
-המשך טיפול של צוות Devnet.
-
-*🟠 עיוורון ניטורי במספר בדיקות Memory Usage בשירות OenAman IT Kirya:*
-*מזהה:* INC0120573
-בטיפול של צוות Trix.
-
-*🟠 עיוורון ניטורי במספר בדיקות Memory Usage בשירות UC Sapir:*
-*מזהה:* INC0120566
-בטיפול צוות Trix.
-
-*🟢 טחינת קו באתר מפקדה G1 - RT Shual:*
-*מזהה:* INC0120453
-לאחר זמן מה הטחינה ירדה מעצמה.
-
-*🟢 נפילה של Elastic Data Node אחד בשירות Isengard:*
-*מזהה:* INC0120494
-לאחר בירור של צוות Trix נראה שה- Node לא הצליח למשוך Image בצורה אוטומטית מה- Harbor.
-צוות Trix ביצעו את המשיכה בצורה ידנית וחזרה תקינות. 
-
-*🟢 אתר שבעת הכוכבים למטה:*
-*מזהה:* INC0120436
-לאחר בירור מול 9272 נמצא כי בוצעה הקמת OTDR בין שבעת הכוכבים לקריה. במהלך הפעילות נותקו 2 הרגליים באתר במקום רגל-רגל בטעות אנוש.
-הצוות ביצעו חזרה לאחור וחזרה תקינות.
-
-*🟢 לא ניתן לגשת למערכת Service now:*
-*מזהה:* INC0120402
-לאחר בירור מול צוות Horizon, נראה כי במהלך פעילות "העלאת גרסה למערכת Service now" בוצע ריסוט ל-Service על אחד משרתי האפליקציה האחראי להריץ את המערכת. במהלך השדרוג של אותו שרת, שרת האפליקציה השני הפנה משתמשים לגרסה החדשה של המערכת שעוד לא הייתה קיימת על השרת ולכן חלק מהמשתמשים לא הצליחו לגשת למערכת. 
-צוות Horizon חסמו את פניית המשתמשים דרך ה-AVI שתיהיה לשרת הראשון בלבד שכבר עבר את השדרוג וחזרה תקינות משתמשים.
-
-*🟢 נפילת קו WAN בנתיבי שייט G4 - U4:*
-*מזהה:* INC0120353
-לאחר בירור נראה כי חזרה תקינות מעצמה.
-
-*🟢 ניטור שווא בבדיקת External Domain ברשת OA בשירות Active directory:*
-*מזהה:* INC0120222
-דרך פתרון בבירור.
-
-*🟢 בדיקת Airflow Worker נצבעת לסירוגין בשירות Isengard:*
-*מזהה:* INC0119595
-בעקבות נפילה של Harbour K8S Trix נראה כי הפרוייקט של ה-Airflow שובש.
-צוות Trix הורידו את ה-Pod וכשהוא עלה מחדש חזרה תקינות.
-
-*🟢 מערכת חדר מלחמה למטה לסירוגין:*
-*מזהה:* INC0119789
-לפי צוות Drive לפעמים הפודים קורסים בעקבות עומס. צוות Drive כתבו Script חדש שלא יוצר עומס.
-הצוות הטמיעו את הScript וחזרה תקינות למערכת.
-
-*פעילויות ושינויים:*
-⬅️הפצת סידור הרשאות WOL עם התראה בתלם - החלה.
-⬅️העלאת גרסה ה- Service Now - החלה.
-⬅️הוספת יכולת חדרים אישיים למשתמשי OA במערכת Cisco Jabber - החלה.
-⚪הפצת Bitlocker ב-5410 - עוד לא החלה.
-✅העלאת גרסה למערכת חצר אמ"ן - הסתיימה.
-`
-
 function CreateBeeper() {
+  // Creating use states for each field
+  const [outputEditable, setOutputEditable] = useState(true)
+  const [incidentNumber, setIncidentNumber] = useState('')
+  const [incidentTitle, setIncidentTitle] = useState('')
+  const [operationalImpact, setOperationalImpact] = useState('')
+  const [status, setStatus] = useState('')
+  const [team, setTeam] = useState('')
+  const [source, setSource] = useState('')
+  const [emoji, setEmoji] = useState('')
+
+  // Initializing use state functions
+  const toggleOutputEditable = () => {
+    setOutputEditable(outputEditable => !outputEditable);
+  };
+
+  const editField = useCallback((event, usestatefunction, digitonly) => {
+    var value = event.target.value
+    if(digitonly){
+      value = event.target.value.replace(/\D/g, '');
+    }
+    usestatefunction(value);
+  }, []);
+
+  const copyBeeper = () => {
+    navigator.clipboard.writeText(document.getElementById('beeper_output').value)
+    .then(() => {
+      alert('Text copied to clipboard');
+    })
+    .catch((error) => {
+      console.error('Error copying text to clipboard:', error);
+    });
+  }
+
   return (
     <div>
+      {/* Adding the header */}
       <HeaderMenu/>
+
+      {/* Creating a div to fit the page content */}
       <div className='CreatePage'>
         <div className='neumorphism message_sections'>
           <p className='header_text'>עריכת ההודעה</p>
+
+          <div className='neumorphism edit_message_div'>
+            <p className='message_edit_text'>כותרת נוספת</p>
+            <select 
+              className='neumorphism one_line_input_field' 
+              value={source} onChange={(event) => editField(event, setSource, false)}>
+                <option value="">בחר</option>
+                <option value="נוטר ב-WU">נוטר ב-WU</option>
+                <option value="דיווח טלפוני">דיווח טלפוני</option>
+                <option value="דיווח חמ״לי">דיווח חמ״לי</option>
+            </select>
+          </div>
+
+          <div className='neumorphism edit_message_div'>
+            <p className='message_edit_text'>מזהה</p>
+            <input 
+              className='neumorphism one_line_input_field' 
+              size='9' 
+              onChange={(event) => editField(event, setIncidentNumber, true)}
+              value={incidentNumber}
+              maxLength={7}/>
+            <input 
+              className='neumorphism one_line_input_field' 
+              readOnly='true' 
+              size='1' 
+              defaultValue='INC'/>
+          </div>
+
+          <div className='neumorphism edit_message_div'>
+            <p className='message_edit_text'>מהות התקלה</p>
+            <div className='multi_line_input_field_div'>
+              <textarea 
+                className='neumorphism multi_line_input_field'
+                onChange={(event) => editField(event, setIncidentTitle, false)}/>
+            </div>
+          </div>
+
+          <div className='neumorphism edit_message_div'>
+            <p className='message_edit_text'>משמעות מבצעית</p>
+            <div className='multi_line_input_field_div'>
+              <textarea 
+                className='neumorphism multi_line_input_field'
+                onChange={(event) => editField(event, setOperationalImpact, false)}/>
+            </div>
+          </div>
+
+          <div className='neumorphism edit_message_div'>
+            <p className='message_edit_text'>סטטוס טיפול</p>
+            <div className='multi_line_input_field_div'>
+              <textarea 
+                className='neumorphism multi_line_input_field'
+                onChange={(event) => editField(event, setStatus, false)}/>
+            </div>
+          </div>
+
+          <div className='neumorphism edit_message_div'>
+            <p className='message_edit_text'>צוות מנהל</p>
+            <div className='multi_line_input_field_div'>
+              <textarea 
+                className='neumorphism multi_line_input_field'
+                onChange={(event) => editField(event, setTeam, false)}/>
+            </div>
+          </div>
+
+          <div className='neumorphism edit_message_div'>
+            <p className='message_edit_text'>מקור התקלה</p>
+            <select 
+              className='neumorphism one_line_input_field' 
+              value={source} onChange={(event) => editField(event, setSource, false)}>
+                <option value="">בחר</option>
+                <option value="נוטר ב-WU">נוטר ב-WU</option>
+                <option value="דיווח טלפוני">דיווח טלפוני</option>
+                <option value="דיווח חמ״לי">דיווח חמ״לי</option>
+            </select>
+            <select 
+              className='neumorphism one_line_input_field' 
+              value={emoji} onChange={(event) => editField(event, setEmoji, false)}>
+                <option value="">בחר</option>
+                <option value="🔴">🔴</option>
+                <option value="🟠">🟠</option>
+            </select>
+          </div>
         </div>
+
         <div className='neumorphism message_sections'>
           <p className='header_text'>פלט ההודעה</p>
-          <textarea id='message_output' className='neumorphism message_output' defaultValue={default_text}>
 
+          <textarea 
+            id='beeper_output'
+            readOnly={outputEditable} 
+            className='neumorphism message_output' 
+            value={`*מזהה:* INC${incidentNumber}\n\n*מהות התקלה:* ${incidentTitle}\n\n*משמעות מבצעית:* ${operationalImpact}\n\n*סטטוס טיפול:* ${status}\n\n*צוות מנהל/מטפל:* ${team}\n\n*מקור התקלה:* ${source} ${emoji}`}>
           </textarea>
+
+          <div className='message_output_button_div'>
+
+            <button className='neumorphism message_output_button' 
+              onClick={toggleOutputEditable}>
+                {outputEditable ? 'ערוך' : 'שמור'}
+            </button>
+
+            <button 
+              id='copy_button'
+              className='neumorphism message_output_button'
+              onClick={copyBeeper}>
+                העתק
+            </button>
+          </div>
         </div>
       </div>
     </div>

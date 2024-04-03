@@ -1,11 +1,39 @@
 * {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
 
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+button:hover {
+  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #222,
+    inset -5px -5px 10px #444;
+  color: #d6d6d6;
+  transition: 500ms;
 }
 
 a{
@@ -20,16 +48,17 @@ a{
 }
 
 .header_logo {
-  height: 20vmin;
+  height: 15vh;
   margin: -20px;
-  margin-left: 15px;
+  margin-left: 10px;
   pointer-events: none;
 }
 
 .header_menu {
   background-color: #282c34;
-  min-height: 15vh;
-  max-height: 15vh;
+  min-height: 10vh;
+  max-height: 10vh;
+  margin: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -51,7 +80,6 @@ a{
 
 .CreatePage{
   background-color: #282c34;
-  min-height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,14 +95,18 @@ a{
 }
 
 .links_div{
+  margin-right: 25px;
   display: flex;
   direction: rtl;
 }
 
 .link_text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: bold;
-  font-size: 20px;
   margin: 15px;
+  padding: 10px;
   text-decoration: none;
   color: white;
 }
@@ -94,14 +126,10 @@ a{
 .neumorphism{
   border-radius: 10px;
   background: #282c34;
-  justify-content: center;
-  align-items: center;
   box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #303030,
     inset -5px -5px 10px #222;
-  cursor: pointer;
   border: none;
   color: #d6d6d6;
-  transition: 500ms;
 }
 
 .message_type_button {
@@ -109,27 +137,36 @@ a{
   min-height: 200px;
   max-width: 250px;
   max-height: 200px;
-  font-size: 20px;
   margin: 10px;
-}
-
-.message_type_button:hover {
-  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #222,
-    inset -5px -5px 10px #444;
-  color: #d6d6d6;
+  font-weight: bold;
   transition: 500ms;
+  cursor: pointer;
 }
 
 .message_sections{
   display: flex;
   flex-direction: column;
   flex: 1;
-  min-height: 80vh;
-  max-height: 80vh;
+  min-height: 1100px;
+  max-height: 1100px;
   min-width: 500px;
-  /* padding: 0px; */
   margin: 20px;
   margin-top: 0px;
+  align-items: center;
+  overflow: auto;
+}
+
+.message_output_button_div{
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.message_output_button{
+  font-weight: bold;
+  width: 45%;
+  height: 100px;
 }
 
 .message_output{
@@ -137,8 +174,48 @@ a{
   flex: 1;
   padding: 20px;
   resize: none;
-  font-size: 15px;
   margin-bottom: 25px;
+}
+
+.edit_message_div{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+  width: 85%;
+  margin: 10px;
+}
+
+.message_edit_text{
+  font-weight: bold;
+  margin: 10px;
+}
+
+.one_line_input_field{
+  border-radius: 10px;
+  background: #282c34;
+  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #303030,
+    inset -5px -5px 10px #222;
+  border: none;
+  color: #d6d6d6;  text-align: center;
+  padding: 10px;
+  margin: 10px;
+  min-width: 50px;
+}
+
+.multi_line_input_field_div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100%;
+}
+
+.multi_line_input_field{
+  display: flex;
+  resize: none;
+  margin: 10px;
+  min-width: 95%;
 }
 
 .message_output:focus {
